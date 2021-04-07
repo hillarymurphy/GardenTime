@@ -48,4 +48,15 @@ public class GardenBox {
 		double a = this.length * this.width;
 		return a;
 	}
+
+	/**
+	 * To String Method
+	 */
+	@Override
+	public String toString() {
+		return "GardenBox [length=" + length + ", width=" + width + ", area=" + area + ", depth=" + depth + ", sun="
+				+ sun + ", area=" + area() + "]";
+	}
+	
+	
 }
