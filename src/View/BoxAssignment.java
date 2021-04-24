@@ -1,3 +1,4 @@
+package View;
 
 
 import org.eclipse.swt.widgets.Display;
@@ -24,7 +25,7 @@ public class BoxAssignment {
 	public static void main(String[] args) {
 		try {
 			BoxAssignment window = new BoxAssignment();
-			window.open();
+			window.open(null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -33,9 +34,9 @@ public class BoxAssignment {
 	/**
 	 * Open the window.
 	 */
-	public void open() {
+	public void open(String pass) {
 		Display display = Display.getDefault();
-		createContents();
+		createContents(pass);
 		shlBoxSelection.open();
 		shlBoxSelection.layout();
 		while (!shlBoxSelection.isDisposed()) {
@@ -48,7 +49,7 @@ public class BoxAssignment {
 	/**
 	 * Create contents of the window.
 	 */
-	protected void createContents() {
+	protected void createContents(String pass) {
 		shlBoxSelection = new Shell();
 		shlBoxSelection.setSize(450, 300);
 		shlBoxSelection.setText("Box Selection");
@@ -61,7 +62,8 @@ public class BoxAssignment {
 		Recommendation = new Text(shlBoxSelection, SWT.NONE);
 		Recommendation.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));
 		Recommendation.setFont(SWTResourceManager.getFont("Segoe UI", 12, SWT.NORMAL));
-		Recommendation.setBounds(166, 47, 97, 27);
+		Recommendation.setText(pass);
+		Recommendation.setBounds(129, 49, 144, 27);
 		
 		txtDoYouWant = new Text(shlBoxSelection, SWT.NONE);
 		txtDoYouWant.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));

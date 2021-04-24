@@ -1,18 +1,29 @@
+package Model;
 
 public class GardenBox {
 
+	int boxNum;
 	int length;
 	int width;
 	int area;
 	int depth;
 	String sun;
 	
-	public GardenBox(int l, int w, int d, String s)
+	public GardenBox(int n, int l, int w, int d, String s)
 	{
+		setBoxNum(n);
 		setLength(l);
 		setWidth(w);
+		setArea();
 		setDepth(d);
 		setSun(s);
+	}
+	
+	public int getBoxNum() {
+		return boxNum;
+	}
+	public void setBoxNum(int boxNum) {
+		this.boxNum = boxNum;
 	}
 	
 	public int getLength() {
@@ -41,11 +52,19 @@ public class GardenBox {
 		this.sun = sun;
 	}
 	
+	public int getArea() {
+		return area;
+	}
+	public void setArea() {
+		this.area = area();
+	}
+	
+	
 	/**
 	 * Method implementation for area method with formula for rectangle perimeter
 	 */
-	public double area() {
-		double a = this.length * this.width;
+	public int area() {
+		int a = this.length * this.width;
 		return a;
 	}
 
@@ -54,9 +73,11 @@ public class GardenBox {
 	 */
 	@Override
 	public String toString() {
-		return "GardenBox [length=" + length + ", width=" + width + ", area=" + area + ", depth=" + depth + ", sun="
-				+ sun + ", area=" + area() + "]";
+		return 	"W: " + width + "\r\nL: " + length + "\r\nA: " + area + "\r\nD: " + depth + "\r\nS: " + sun;
 	}
 	
+	public String BoxNumtoString() {
+		return 	"Box Number: " + boxNum;
+	}
 	
 }

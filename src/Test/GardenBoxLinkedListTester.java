@@ -1,3 +1,6 @@
+package Test;
+
+import Model.*;
 
 public class GardenBoxLinkedListTester {
 
@@ -5,26 +8,26 @@ public class GardenBoxLinkedListTester {
 		/* Start with the empty list */
         GardenBoxLinkedList llist = new GardenBoxLinkedList();
         
-        GardenBox Box1 = new GardenBox(20, 5, 10, "full");
+        GardenBox Box1 = new GardenBox(1, 20, 5, 10, "full");
 
         
-        GardenBox Box2 = new GardenBox(6, 3, 5, "full");
-        GardenBox Box3 = new GardenBox(6, 3, 6, "full");
-        GardenBox Box4 = new GardenBox(6, 3, 6, "full");
+        GardenBox Box2 = new GardenBox(2, 6, 3, 5, "full");
+        GardenBox Box3 = new GardenBox(3, 6, 3, 6, "full");
+        GardenBox Box4 = new GardenBox(4, 6, 3, 6, "full");
         
-        GardenBox Box5 = new GardenBox(6, 3, 8, "full");
-        GardenBox Box6 = new GardenBox(6, 3, 5, "full");
-        GardenBox Box7 = new GardenBox(6, 3, 5, "full");
+        GardenBox Box5 = new GardenBox(5, 6, 3, 8, "full");
+        GardenBox Box6 = new GardenBox(6, 6, 3, 5, "full");
+        GardenBox Box7 = new GardenBox(7, 6, 3, 5, "full");
         
-        GardenBox Box8 = new GardenBox(3, 2, 5, "shady");
+        GardenBox Box8 = new GardenBox(8, 3, 2, 5, "shady");
         
-        GardenBox Box9 = new GardenBox(7, 3, 6, "partial sun");
+        GardenBox Box9 = new GardenBox(9, 7, 3, 6, "partial sun");
         
-        GardenBox Box10 = new GardenBox(7, 5, 6, "partial sun");
+        GardenBox Box10 = new GardenBox(10, 7, 5, 6, "partial sun");
         
-        GardenBox Box11 = new GardenBox(7, 3, 6, "partial sun");
+        GardenBox Box11 = new GardenBox(11, 7, 3, 6, "partial sun");
         
-        GardenBox Box12 = new GardenBox(3, 2, 5, "partial sun");
+        GardenBox Box12 = new GardenBox(12, 3, 2, 5, "partial sun");
   
         // Insert Box3.  So linked list becomes Box3->NUllist
         llist.append(Box3);
@@ -57,6 +60,14 @@ public class GardenBoxLinkedListTester {
         System.out.println("GardenBox Linked List: \n");
         System.out.println(llist.printList());
         
+        System.out.println(llist.GetNth(5));
+        
+        GardenBoxLinkedList nlist = new GardenBoxLinkedList();
+        nlist = llist;
+
+        nlist.insertionSortDepth(nlist.head); 
+        System.out.println("GardenBox Linked Sorted List: \n");
+        System.out.println(nlist.printList());
 
 	}
 
