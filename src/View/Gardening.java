@@ -27,6 +27,9 @@ public class Gardening {
 	private Text textWater;
 	private Text textHarvest;
 	private final FormToolkit formToolkit = new FormToolkit(Display.getDefault());
+	
+	String[] BoxTexts = {"Box1 Empty", "Box2 Empty", "Box3 Empty", "Box4 Empty", "Box5 Empty", "Box6 Empty", 
+			"Box7 Empty", "Box8 Empty", "Box9 Empty", "Box10 Empty", "Box11 Empty", "Box12 Empty"};
 
 	/**
 	 * Launch the application.
@@ -35,7 +38,7 @@ public class Gardening {
 	public static void main(String[] args) {
 		try {
 			Gardening window = new Gardening();
-			window.open(null);
+			window.open(null, null, null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -45,9 +48,9 @@ public class Gardening {
 	 * Open the window.
 	 * @param llist 
 	 */
-	public void open(GardenBoxLinkedList llist) {
+	public void open(GardenBoxLinkedList llist, BoxToVegHashMap bvMap, Gardening g) {
 		Display display = Display.getDefault();
-		createContents(llist);
+		createContents(llist,bvMap, g);
 		shlSetUpYour.open();
 		shlSetUpYour.layout();
 		while (!shlSetUpYour.isDisposed()) {
@@ -60,7 +63,7 @@ public class Gardening {
 	/**
 	 * Create contents of the window.
 	 */
-	protected void createContents(GardenBoxLinkedList llist) {
+	protected void createContents(GardenBoxLinkedList llist, BoxToVegHashMap bvMap, Gardening g) {
 		
 		shlSetUpYour = new Shell();
 		shlSetUpYour.setSize(612, 513);
@@ -126,6 +129,188 @@ public class Gardening {
 		textHarvest = new Text(shlSetUpYour, SWT.BORDER);
 		textHarvest.setBounds(496, 110, 76, 21);
 		
+		
+		
+		Label Box1Veg = new Label(shlSetUpYour, SWT.NONE);
+		Box1Veg.setText(BoxTexts[0]);
+		Box1Veg.setBounds(-1, 184, 117, 15);
+		formToolkit.adapt(Box1Veg, true, true);
+		
+		Label Box1Specs = new Label(shlSetUpYour, SWT.NONE);
+		Box1Specs.setText("" + llist.GetBox(1));
+		Box1Specs.setFont(SWTResourceManager.getFont("Arial", 8, SWT.NORMAL));
+		Box1Specs.setBounds(62, 366, 54, 70);
+		formToolkit.adapt(Box1Specs, true, true);
+		
+		Label Box1 = formToolkit.createLabel(shlSetUpYour, "Box 2", SWT.BORDER);
+		Box1.setBackground(SWTResourceManager.getColor(204, 255, 204));
+		Box1.setBounds(0, 205, 122, 237);
+		
+		Label Box2Veg = new Label(shlSetUpYour, SWT.NONE);
+		Box2Veg.setText(BoxTexts[1]);
+		Box2Veg.setBounds(128, 170, 110, 15);
+		formToolkit.adapt(Box2Veg, true, true);
+		
+		Label Box2Specs = new Label(shlSetUpYour, SWT.NONE);
+		Box2Specs.setText("" + llist.GetBox(2));
+		Box2Specs.setFont(SWTResourceManager.getFont("Arial", 8, SWT.NORMAL));
+		Box2Specs.setBounds(179, 191, 54, 70);
+		formToolkit.adapt(Box2Specs, true, true);
+		
+		Label Box2 = formToolkit.createLabel(shlSetUpYour, "Box 2", SWT.BORDER);
+		Box2.setBackground(SWTResourceManager.getColor(204, 255, 204));
+		Box2.setBounds(128, 189, 110, 75);
+		
+		Label Box3Veg = new Label(shlSetUpYour, SWT.NONE);
+		Box3Veg.setText(BoxTexts[2]);
+		Box3Veg.setBounds(128, 267, 110, 15);
+		formToolkit.adapt(Box3Veg, true, true);
+		
+		Label Box3Specs = new Label(shlSetUpYour, SWT.NONE);
+		Box3Specs.setText("" + llist.GetBox(3));
+		Box3Specs.setFont(SWTResourceManager.getFont("Arial", 8, SWT.NORMAL));
+		Box3Specs.setBounds(179, 288, 54, 70);
+		formToolkit.adapt(Box3Specs, true, true);
+		
+		Label Box3 = formToolkit.createLabel(shlSetUpYour, "Box 3", SWT.BORDER);
+		Box3.setBackground(SWTResourceManager.getColor(204, 255, 204));
+		Box3.setBounds(128, 286, 110, 75);
+		
+		Label Box4Veg = new Label(shlSetUpYour, SWT.NONE);
+		Box4Veg.setText(BoxTexts[3]);
+		Box4Veg.setBounds(128, 370, 110, 15);
+		formToolkit.adapt(Box4Veg, true, true);
+		
+		Label Box4Specs = new Label(shlSetUpYour, SWT.NONE);
+		Box4Specs.setText("" + llist.GetBox(4));
+		Box4Specs.setFont(SWTResourceManager.getFont("Arial", 8, SWT.NORMAL));
+		Box4Specs.setBounds(179, 391, 54, 70);
+		formToolkit.adapt(Box4Specs, true, true);
+		
+		Label Box4 = formToolkit.createLabel(shlSetUpYour, "Box 4", SWT.BORDER);
+		Box4.setBackground(SWTResourceManager.getColor(204, 255, 204));
+		Box4.setBounds(128, 389, 110, 75);
+		
+		Label Box5Veg = new Label(shlSetUpYour, SWT.NONE);
+		Box5Veg.setText(BoxTexts[4]);
+		Box5Veg.setBounds(244, 170, 110, 15);
+		formToolkit.adapt(Box5Veg, true, true);
+		
+		Label Box5Specs = new Label(shlSetUpYour, SWT.NONE);
+		Box5Specs.setText("" + llist.GetBox(5));
+		Box5Specs.setFont(SWTResourceManager.getFont("Arial", 8, SWT.NORMAL));
+		Box5Specs.setBounds(294, 191, 54, 70);
+		formToolkit.adapt(Box5Specs, true, true);
+		
+		Label Box5 = formToolkit.createLabel(shlSetUpYour, "Box 5", SWT.BORDER);
+		Box5.setBackground(SWTResourceManager.getColor(204, 255, 204));
+		Box5.setBounds(244, 189, 110, 75);
+		
+		Label Box6Veg = new Label(shlSetUpYour, SWT.NONE);
+		Box6Veg.setText(BoxTexts[5]);
+		Box6Veg.setBounds(244, 267, 110, 15);
+		formToolkit.adapt(Box6Veg, true, true);
+		
+		Label Box6Specs = new Label(shlSetUpYour, SWT.NONE);
+		Box6Specs.setText("" + llist.GetBox(6));
+		Box6Specs.setFont(SWTResourceManager.getFont("Arial", 8, SWT.NORMAL));
+		Box6Specs.setBounds(294, 288, 54, 70);
+		formToolkit.adapt(Box6Specs, true, true);
+		
+		Label Box6 = formToolkit.createLabel(shlSetUpYour, "Box 6", SWT.BORDER);
+		Box6.setBackground(SWTResourceManager.getColor(204, 255, 204));
+		Box6.setBounds(244, 286, 110, 75);
+		
+		Label Box7Veg = new Label(shlSetUpYour, SWT.NONE);
+		Box7Veg.setText(BoxTexts[6]);
+		Box7Veg.setBounds(244, 370, 110, 15);
+		formToolkit.adapt(Box7Veg, true, true);
+		
+		Label Box7Specs = new Label(shlSetUpYour, SWT.NONE);
+		Box7Specs.setText("" + llist.GetBox(7));
+		Box7Specs.setFont(SWTResourceManager.getFont("Arial", 8, SWT.NORMAL));
+		Box7Specs.setBounds(294, 391, 54, 70);
+		formToolkit.adapt(Box7Specs, true, true);
+		
+		Label Box7 = formToolkit.createLabel(shlSetUpYour, "Box 7", SWT.BORDER);
+		Box7.setBackground(SWTResourceManager.getColor(204, 255, 204));
+		Box7.setBounds(244, 389, 110, 75);
+		
+		Label Box8Veg = new Label(shlSetUpYour, SWT.NONE);
+		Box8Veg.setText(BoxTexts[7]);
+		Box8Veg.setBounds(361, 170, 110, 15);
+		formToolkit.adapt(Box8Veg, true, true);
+		
+		Label Box8Specs = new Label(shlSetUpYour, SWT.NONE);
+		Box8Specs.setText("" + llist.GetBox(8));
+		Box8Specs.setFont(SWTResourceManager.getFont("Arial", 8, SWT.NORMAL));
+		Box8Specs.setBounds(426, 191, 54, 70);
+		formToolkit.adapt(Box8Specs, true, true);
+		
+		Label Box8 = formToolkit.createLabel(shlSetUpYour, "Box 8", SWT.BORDER);
+		Box8.setBackground(SWTResourceManager.getColor(204, 255, 204));
+		Box8.setBounds(360, 189, 125, 55);
+		
+		Label Box9Veg = new Label(shlSetUpYour, SWT.NONE);
+		Box9Veg.setText(BoxTexts[8]);
+		Box9Veg.setBounds(361, 267, 110, 15);
+		formToolkit.adapt(Box9Veg, true, true);
+		
+		Label Box9Specs = new Label(shlSetUpYour, SWT.NONE);
+		Box9Specs.setText("" + llist.GetBox(9));
+		Box9Specs.setFont(SWTResourceManager.getFont("Arial", 8, SWT.NORMAL));
+		Box9Specs.setBounds(426, 289, 54, 70);
+		formToolkit.adapt(Box9Specs, true, true);
+		
+		Label Box9 = formToolkit.createLabel(shlSetUpYour, "Box 9", SWT.BORDER);
+		Box9.setBackground(SWTResourceManager.getColor(204, 255, 204));
+		Box9.setBounds(360, 285, 125, 80);
+		
+		Label Box10Veg = new Label(shlSetUpYour, SWT.NONE);
+		Box10Veg.setText(BoxTexts[9]);
+		Box10Veg.setBounds(361, 370, 110, 15);
+		formToolkit.adapt(Box10Veg, true, true);
+		
+		Label Box10Specs = new Label(shlSetUpYour, SWT.NONE);
+		Box10Specs.setText("" + llist.GetBox(10));
+		Box10Specs.setFont(SWTResourceManager.getFont("Arial", 8, SWT.NORMAL));
+		Box10Specs.setBounds(426, 391, 54, 70);
+		formToolkit.adapt(Box10Specs, true, true);
+		
+		Label Box10 = formToolkit.createLabel(shlSetUpYour, "Box 10", SWT.BORDER);
+		Box10.setBackground(SWTResourceManager.getColor(204, 255, 204));
+		Box10.setBounds(360, 389, 125, 55);
+		
+		Label Box11Veg = new Label(shlSetUpYour, SWT.NONE);
+		Box11Veg.setText(BoxTexts[10]);
+		Box11Veg.setBounds(507, 207, 85, 15);
+		formToolkit.adapt(Box11Veg, true, true);
+		
+		Label Box11Specs = new Label(shlSetUpYour, SWT.NONE);
+		Box11Specs.setText("" + llist.GetBox(11));
+		Box11Specs.setFont(SWTResourceManager.getFont("Arial", 8, SWT.NORMAL));
+		Box11Specs.setBounds(532, 241, 54, 70);
+		formToolkit.adapt(Box11Specs, true, true);
+		
+		Label Box11 = formToolkit.createLabel(shlSetUpYour, "Box 11", SWT.BORDER);
+		Box11.setBackground(SWTResourceManager.getColor(204, 255, 204));
+		Box11.setBounds(517, 227, 75, 45);
+		
+		Label Box12Veg = new Label(shlSetUpYour, SWT.NONE);
+		Box12Veg.setText(BoxTexts[11]);
+		Box12Veg.setBounds(507, 318, 85, 15);
+		formToolkit.adapt(Box12Veg, true, true);
+		
+		Label Box12Specs = new Label(shlSetUpYour, SWT.NONE);
+		Box12Specs.setText("" + llist.GetBox(12));
+		Box12Specs.setFont(SWTResourceManager.getFont("Arial", 8, SWT.NORMAL));
+		Box12Specs.setBounds(532, 352, 54, 70);
+		formToolkit.adapt(Box12Specs, true, true);
+		
+		Label Box12 = formToolkit.createLabel(shlSetUpYour, "Box 12", SWT.BORDER);
+		Box12.setBackground(SWTResourceManager.getColor(204, 255, 204));
+		Box12.setBounds(517, 337, 75, 45);
+		
 		Button btnSubmit = new Button(shlSetUpYour, SWT.NONE);
 		btnSubmit.addMouseListener(new MouseAdapter() {
 			@Override
@@ -141,7 +326,7 @@ public class Gardening {
 				double spaceRow = 0.0;
 				if(checkDouble(textSBetweenR.getText()))
 				{
-					spacePer = Double.parseDouble(textSBetweenR.getText());
+					spaceRow = Double.parseDouble(textSBetweenR.getText());
 				}
 				double depthReq = 0.0;
 				if(checkDouble(textDepth.getText()))
@@ -151,7 +336,7 @@ public class Gardening {
 				String sunReq = textSun.getText();
 				String waterReq = textWater.getText();
 				int harvestDuration = 0;
-				if(checkDouble(textHarvest.getText()))
+				if(checkInteger(textHarvest.getText()))
 				{
 					harvestDuration = Integer.parseInt(textHarvest.getText());
 				}
@@ -167,132 +352,36 @@ public class Gardening {
 				
 				BoxAssignment boxA = new BoxAssignment();
 				String pass = sugBox.BoxNumtoString();
-				boxA.open(pass);
+				sugBox = boxA.open(pass, nlist, sugBox, g, tempVeg, BoxTexts);
+				Box1Veg.setText(BoxTexts[0]);
+				Box2Veg.setText(BoxTexts[1]);
+				Box3Veg.setText(BoxTexts[2]);
+				Box4Veg.setText(BoxTexts[3]);
+				Box5Veg.setText(BoxTexts[4]);
+				Box6Veg.setText(BoxTexts[5]);
+				Box7Veg.setText(BoxTexts[6]);
+				Box8Veg.setText(BoxTexts[7]);
+				Box9Veg.setText(BoxTexts[8]);
+				Box10Veg.setText(BoxTexts[9]);
+				Box11Veg.setText(BoxTexts[10]);
+				Box12Veg.setText(BoxTexts[11]);
+				bvMap.putIfAbsent(sugBox, tempVeg);
+				nlist.deleteAtPosition(nlist, sugBox);
+				
+				textVeg.setText("");
+				textSorP.setText("");
+				textSBetween.setText("");
+				textSBetweenR.setText("");
+				textDepth.setText("");
+				textSun.setText("");
+				textWater.setText("");
+				textHarvest.setText("");
 			}
 		});
+		
 		btnSubmit.setBounds(246, 138, 75, 25);
 		formToolkit.adapt(btnSubmit, true, true);
 		btnSubmit.setText("Submit");
-		
-		Label Box1Specs = new Label(shlSetUpYour, SWT.NONE);
-		Box1Specs.setText("" + llist.GetNth(0));
-		Box1Specs.setFont(SWTResourceManager.getFont("Arial", 8, SWT.NORMAL));
-		Box1Specs.setBounds(62, 366, 54, 70);
-		formToolkit.adapt(Box1Specs, true, true);
-		
-		Label Box1 = formToolkit.createLabel(shlSetUpYour, "Box 2", SWT.BORDER);
-		Box1.setBackground(SWTResourceManager.getColor(204, 255, 204));
-		Box1.setBounds(0, 205, 122, 237);
-		
-		Label Box2Specs = new Label(shlSetUpYour, SWT.NONE);
-		Box2Specs.setText("" + llist.GetNth(1));
-		Box2Specs.setFont(SWTResourceManager.getFont("Arial", 8, SWT.NORMAL));
-		Box2Specs.setBounds(179, 191, 54, 70);
-		formToolkit.adapt(Box2Specs, true, true);
-		
-		Label Box2 = formToolkit.createLabel(shlSetUpYour, "Box 2", SWT.BORDER);
-		Box2.setBackground(SWTResourceManager.getColor(204, 255, 204));
-		Box2.setBounds(128, 189, 110, 75);
-		
-		Label Box3Specs = new Label(shlSetUpYour, SWT.NONE);
-		Box3Specs.setText("" + llist.GetNth(2));
-		Box3Specs.setFont(SWTResourceManager.getFont("Arial", 8, SWT.NORMAL));
-		Box3Specs.setBounds(179, 288, 54, 70);
-		formToolkit.adapt(Box3Specs, true, true);
-		
-		Label Box3 = formToolkit.createLabel(shlSetUpYour, "Box 3", SWT.BORDER);
-		Box3.setBackground(SWTResourceManager.getColor(204, 255, 204));
-		Box3.setBounds(128, 286, 110, 75);
-		
-		Label Box4Specs = new Label(shlSetUpYour, SWT.NONE);
-		Box4Specs.setText("" + llist.GetNth(3));
-		Box4Specs.setFont(SWTResourceManager.getFont("Arial", 8, SWT.NORMAL));
-		Box4Specs.setBounds(179, 391, 54, 70);
-		formToolkit.adapt(Box4Specs, true, true);
-		
-		Label Box4 = formToolkit.createLabel(shlSetUpYour, "Box 4", SWT.BORDER);
-		Box4.setBackground(SWTResourceManager.getColor(204, 255, 204));
-		Box4.setBounds(128, 389, 110, 75);
-		
-		Label Box5Specs = new Label(shlSetUpYour, SWT.NONE);
-		Box5Specs.setText("" + llist.GetNth(4));
-		Box5Specs.setFont(SWTResourceManager.getFont("Arial", 8, SWT.NORMAL));
-		Box5Specs.setBounds(294, 191, 54, 70);
-		formToolkit.adapt(Box5Specs, true, true);
-		
-		Label Box5 = formToolkit.createLabel(shlSetUpYour, "Box 5", SWT.BORDER);
-		Box5.setBackground(SWTResourceManager.getColor(204, 255, 204));
-		Box5.setBounds(244, 189, 110, 75);
-		
-		Label Box6Specs = new Label(shlSetUpYour, SWT.NONE);
-		Box6Specs.setText("" + llist.GetNth(5));
-		Box6Specs.setFont(SWTResourceManager.getFont("Arial", 8, SWT.NORMAL));
-		Box6Specs.setBounds(294, 288, 54, 70);
-		formToolkit.adapt(Box6Specs, true, true);
-		
-		Label Box6 = formToolkit.createLabel(shlSetUpYour, "Box 6", SWT.BORDER);
-		Box6.setBackground(SWTResourceManager.getColor(204, 255, 204));
-		Box6.setBounds(244, 286, 110, 75);
-		
-		Label Box7Specs = new Label(shlSetUpYour, SWT.NONE);
-		Box7Specs.setText("" + llist.GetNth(6));
-		Box7Specs.setFont(SWTResourceManager.getFont("Arial", 8, SWT.NORMAL));
-		Box7Specs.setBounds(294, 391, 54, 70);
-		formToolkit.adapt(Box7Specs, true, true);
-		
-		Label Box7 = formToolkit.createLabel(shlSetUpYour, "Box 7", SWT.BORDER);
-		Box7.setBackground(SWTResourceManager.getColor(204, 255, 204));
-		Box7.setBounds(244, 389, 110, 75);
-		
-		Label Box8Specs = new Label(shlSetUpYour, SWT.NONE);
-		Box8Specs.setText("" + llist.GetNth(7));
-		Box8Specs.setFont(SWTResourceManager.getFont("Arial", 8, SWT.NORMAL));
-		Box8Specs.setBounds(426, 191, 54, 70);
-		formToolkit.adapt(Box8Specs, true, true);
-		
-		Label Box8 = formToolkit.createLabel(shlSetUpYour, "Box 8", SWT.BORDER);
-		Box8.setBackground(SWTResourceManager.getColor(204, 255, 204));
-		Box8.setBounds(360, 189, 125, 55);
-		
-		Label Box9Specs = new Label(shlSetUpYour, SWT.NONE);
-		Box9Specs.setText("" + llist.GetNth(8));
-		Box9Specs.setFont(SWTResourceManager.getFont("Arial", 8, SWT.NORMAL));
-		Box9Specs.setBounds(426, 289, 54, 70);
-		formToolkit.adapt(Box9Specs, true, true);
-		
-		Label Box9 = formToolkit.createLabel(shlSetUpYour, "Box 9", SWT.BORDER);
-		Box9.setBackground(SWTResourceManager.getColor(204, 255, 204));
-		Box9.setBounds(360, 285, 125, 80);
-		
-		Label Box10Specs = new Label(shlSetUpYour, SWT.NONE);
-		Box10Specs.setText("" + llist.GetNth(9));
-		Box10Specs.setFont(SWTResourceManager.getFont("Arial", 8, SWT.NORMAL));
-		Box10Specs.setBounds(426, 391, 54, 70);
-		formToolkit.adapt(Box10Specs, true, true);
-		
-		Label Box10 = formToolkit.createLabel(shlSetUpYour, "Box 10", SWT.BORDER);
-		Box10.setBackground(SWTResourceManager.getColor(204, 255, 204));
-		Box10.setBounds(360, 389, 125, 55);
-		
-		Label Box11Specs = new Label(shlSetUpYour, SWT.NONE);
-		Box11Specs.setText("" + llist.GetNth(10));
-		Box11Specs.setFont(SWTResourceManager.getFont("Arial", 8, SWT.NORMAL));
-		Box11Specs.setBounds(532, 241, 54, 70);
-		formToolkit.adapt(Box11Specs, true, true);
-		
-		Label Box11 = formToolkit.createLabel(shlSetUpYour, "Box 11", SWT.BORDER);
-		Box11.setBackground(SWTResourceManager.getColor(204, 255, 204));
-		Box11.setBounds(517, 227, 75, 45);
-		
-		Label Box12Specs = new Label(shlSetUpYour, SWT.NONE);
-		Box12Specs.setText("" + llist.GetNth(11));
-		Box12Specs.setFont(SWTResourceManager.getFont("Arial", 8, SWT.NORMAL));
-		Box12Specs.setBounds(532, 341, 54, 70);
-		formToolkit.adapt(Box12Specs, true, true);
-		
-		Label Box12 = formToolkit.createLabel(shlSetUpYour, "Box 12", SWT.BORDER);
-		Box12.setBackground(SWTResourceManager.getColor(204, 255, 204));
-		Box12.setBounds(517, 326, 75, 45);
 
 	}
 	
@@ -327,4 +416,17 @@ public class Gardening {
 		}
 		return isDouble;
 	}
+	
+	public void UpdateVegText(int boxNo, Vegetable v)
+	{
+		for(int i=0; i < BoxTexts.length;i++)
+		{
+			String temp = (String) BoxTexts[i].subSequence(0, 5);
+			if(temp.contains("Box"+boxNo))
+			{
+				BoxTexts[i] = v.getKind();
+			}
+		}
+	}
+	
 }

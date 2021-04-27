@@ -60,7 +60,7 @@ public class GardenBoxLinkedListTester {
         System.out.println("GardenBox Linked List: \n");
         System.out.println(llist.printList());
         
-        System.out.println(llist.GetNth(5));
+        System.out.println(llist.GetBox(6));
         
         GardenBoxLinkedList nlist = new GardenBoxLinkedList();
         nlist = llist;

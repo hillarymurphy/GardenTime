@@ -14,12 +14,16 @@ public class BoxToVegHashMap {
 	
 	public boolean containsKey(GardenBox box)
 	{
-		return emap.containsKey(box);
+		return emap.containsKey(box.boxNum);
 	}
 	
 	public Vegetable get(GardenBox box)
 	{
-		return emap.get(box);
+		return emap.get(box.boxNum);
 	}
 	
+	public void putIfAbsent(GardenBox box, Vegetable v)
+	{
+		emap.putIfAbsent(box ,v);
+	}
 }

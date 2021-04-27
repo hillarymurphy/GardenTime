@@ -1,11 +1,14 @@
 package View;
 
-
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.wb.swt.SWTResourceManager;
+
+import Model.*;
+
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
@@ -17,6 +20,8 @@ public class BoxAssignment {
 	private Text Recommendation;
 	private Text txtDoYouWant;
 	private Text txtBoxSwitch;
+	
+	GardenBox selBox = new GardenBox();
 
 	/**
 	 * Launch the application.
@@ -25,7 +30,7 @@ public class BoxAssignment {
 	public static void main(String[] args) {
 		try {
 			BoxAssignment window = new BoxAssignment();
-			window.open(null);
+			window.open(null, null, null, null, null, null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -34,9 +39,9 @@ public class BoxAssignment {
 	/**
 	 * Open the window.
 	 */
-	public void open(String pass) {
+	public GardenBox open(String pass, GardenBoxLinkedList nlist, GardenBox box, Gardening g, Vegetable v, String[] bt) {
 		Display display = Display.getDefault();
-		createContents(pass);
+		selBox = createContents(pass, nlist, box, g, v, bt);
 		shlBoxSelection.open();
 		shlBoxSelection.layout();
 		while (!shlBoxSelection.isDisposed()) {
@@ -44,12 +49,14 @@ public class BoxAssignment {
 				display.sleep();
 			}
 		}
+		return selBox;
 	}
 
 	/**
 	 * Create contents of the window.
 	 */
-	protected void createContents(String pass) {
+	protected GardenBox createContents(String pass, GardenBoxLinkedList nlist, GardenBox box, Gardening g, Vegetable v, String[] bt) {
+		selBox = box;
 		shlBoxSelection = new Shell();
 		shlBoxSelection.setSize(450, 300);
 		shlBoxSelection.setText("Box Selection");
@@ -74,6 +81,8 @@ public class BoxAssignment {
 		btnConfirm.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDown(MouseEvent e) {
+				g.UpdateVegText(selBox.getBoxNum(), v);
+				shlBoxSelection.close();
 			}
 		});
 		btnConfirm.setBounds(71, 137, 75, 25);
@@ -86,10 +95,40 @@ public class BoxAssignment {
 		btnSubmit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDown(MouseEvent e) {
+				int newBox = 0;
+				if(checkInteger(txtBoxSwitch.getText()))
+				{
+					newBox = Integer.parseInt(txtBoxSwitch.getText());
+				}
+				if (nlist.GetBox(newBox)!= null)
+				{
+					selBox = nlist.GetBox(newBox);
+					g.UpdateVegText(selBox.getBoxNum(), v);
+					shlBoxSelection.close();
+				}
+				else
+				{
+					MessageDialog.openError(shlBoxSelection, "Error", newBox + "is not a number or not an availabe box");
+				}
 			}
 		});
 		btnSubmit.setBounds(261, 137, 75, 25);
 		btnSubmit.setText("Submit");
-
+		return selBox;
+	}
+	public boolean checkInteger(String currentInput)
+	{
+		boolean isInteger = false;
+		
+		try 
+		{
+			Integer.parseInt(currentInput);
+			isInteger = true;
+		}
+		catch (NumberFormatException currentException)
+		{
+			MessageDialog.openError(shlBoxSelection, "Error", currentInput + "is not a number");
+		}
+		return isInteger;
 	}
 }

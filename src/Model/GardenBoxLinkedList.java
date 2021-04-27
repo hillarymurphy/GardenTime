@@ -78,16 +78,13 @@ public class GardenBoxLinkedList
         return;
     }
     
-    public GardenBox GetNth(int index)
+    public GardenBox GetBox(int boxNo)
     {
         Node current = head;
-        int count = 0; /* index of Node we are
-                          currently looking at */
         while (current != null)
         {
-            if (count == index)
+            if (current.box.boxNum == boxNo)
                 return current.box;
-            count++;
             current = current.next;
         }
  
@@ -97,48 +94,39 @@ public class GardenBoxLinkedList
         return null;
     }
     
-    public GardenBoxLinkedList deleteAtPosition(GardenBoxLinkedList list, int index)
+    public GardenBoxLinkedList deleteAtPosition(GardenBoxLinkedList list, GardenBox box)
     {
     	// Store head node
     	Node currNode = list.head, prev = null;
-
-    	//index at 0 - remove first box in List
-    	if (index == 0 && currNode != null) {
-    		list.head = currNode.next; // Changed head
-
-    		// Display the message
-    		System.out.println(
-    				index + " position element deleted");
-
-    		// Return the updated List
-    		return list;
-    	}
-    	//index greater than 0
+    	
+    	//index counter
     	int counter = 0;
-
-    	// Count for the index to be deleted, note previous node as it is needed to change currNode.next
-    	while (currNode != null) {
-
-    		if (counter == index) {
-    			// Since the currNode is the required
-    			// position Unlink currNode from linked list
-    			prev.next = currNode.next;
-
-    			// Display the message
-    			System.out.println(
-    					index + " position element deleted");
-    			break;
+    	
+    	while (currNode != null)
+    	{
+    		if (currNode.box == box)
+    		{
+    			if (counter == 0)
+    			{
+    				// since currNode is the required box and head of the list, unlink as head
+    				list.head = currNode.next; // Changed head
+    				break;
+    			}
+    			else 
+    			{
+    				// Since currNode is the required box, unlink currNode from linked list
+    				prev.next = currNode.next;
+    				break;
+    			}
     		}
-    		else {
-    			// If current position is not the index
-    			// continue to next node
+    		else 
+    		{
+    			// continue on to the next node
     			prev = currNode;
     			currNode = currNode.next;
     			counter++;
-    		}
+    		}	
     	}
-
-    	// return the List
     	return list;
     }
   
@@ -224,4 +212,5 @@ public class GardenBoxLinkedList
         }
         return null;
     }
+    
 }

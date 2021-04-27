@@ -1,6 +1,5 @@
 import View.Gardening;
-import Model.GardenBox;
-import Model.GardenBoxLinkedList;
+import Model.*;
 
 public class StartProgram {
 
@@ -43,8 +42,10 @@ public class StartProgram {
 	    llist.append(gBox11);
 	    llist.append(gBox12);
 	    
+	    BoxToVegHashMap bvMap = new BoxToVegHashMap();
+	    
 		Gardening g = new Gardening();
-		g.open(llist);
+		g.open(llist,bvMap, g);
 	}
 
 }

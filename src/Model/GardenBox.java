@@ -9,6 +9,16 @@ public class GardenBox {
 	int depth;
 	String sun;
 	
+	public GardenBox()
+	{
+		setBoxNum(0);
+		setLength(0);
+		setWidth(0);
+		setArea();
+		setDepth(0);
+		setSun("shady");
+	}
+	
 	public GardenBox(int n, int l, int w, int d, String s)
 	{
 		setBoxNum(n);
