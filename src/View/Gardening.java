@@ -420,8 +420,13 @@ public class Gardening {
 	public void UpdateVegText(int boxNo, Vegetable v)
 	{
 		for(int i=0; i < BoxTexts.length;i++)
-		{
-			String temp = (String) BoxTexts[i].subSequence(0, 5);
+		{	
+			int tLength = BoxTexts[i].length();
+			if (tLength >= 5)
+			{
+				tLength = 5;
+			}
+			String temp = (String) BoxTexts[i].subSequence(0, tLength);
 			if(temp.contains("Box"+boxNo))
 			{
 				BoxTexts[i] = v.getKind();
