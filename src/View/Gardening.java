@@ -13,6 +13,7 @@ import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.graphics.Point;
 
 
 public class Gardening {
@@ -31,6 +32,7 @@ public class Gardening {
 	String[] BoxTexts = {"Box1 Empty", "Box2 Empty", "Box3 Empty", "Box4 Empty", "Box5 Empty", "Box6 Empty", 
 			"Box7 Empty", "Box8 Empty", "Box9 Empty", "Box10 Empty", "Box11 Empty", "Box12 Empty"};
 
+	int errorCnt = 0; 
 	/**
 	 * Launch the application.
 	 * @param args
@@ -66,6 +68,7 @@ public class Gardening {
 	protected void createContents(GardenBoxLinkedList llist, BoxToVegHashMap bvMap, Gardening g) {
 		
 		shlSetUpYour = new Shell();
+		shlSetUpYour.setMinimumSize(new Point(133, 39));
 		shlSetUpYour.setSize(612, 513);
 		shlSetUpYour.setText("Set Up Your Garden!");
 		
@@ -88,8 +91,8 @@ public class Gardening {
 		textSorP.setBounds(202, 53, 76, 21);
 		
 		Label lblSpaceBetween = new Label(shlSetUpYour, SWT.NONE);
-		lblSpaceBetween.setText("Space between seeds (inches):");
-		lblSpaceBetween.setBounds(0, 80, 159, 15);
+		lblSpaceBetween.setText("Space between seeds/plants (inches):");
+		lblSpaceBetween.setBounds(0, 80, 202, 15);
 		
 		textSBetween = new Text(shlSetUpYour, SWT.BORDER);
 		textSBetween.setBounds(202, 77, 76, 21);
@@ -116,8 +119,8 @@ public class Gardening {
 		textSun.setBounds(496, 56, 76, 21);
 		
 		Label lblWaterRequired = new Label(shlSetUpYour, SWT.NONE);
-		lblWaterRequired.setText("Water Required:");
-		lblWaterRequired.setBounds(294, 83, 84, 15);
+		lblWaterRequired.setText("Watering frequency required:");
+		lblWaterRequired.setBounds(294, 83, 185, 15);
 		
 		textWater = new Text(shlSetUpYour, SWT.BORDER);
 		textWater.setBounds(496, 83, 76, 21);
@@ -315,7 +318,7 @@ public class Gardening {
 		btnSubmit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDown(MouseEvent e) {
-				
+				errorCnt = 0; 
 				String kind = textVeg.getText();
 				String seedOrPlant = textSorP.getText();
 				Double spacePer = 0.0;
@@ -349,33 +352,51 @@ public class Gardening {
 		        nlist.insertionSortDepth(nlist.head); 
 		        
 		        GardenBox sugBox = nlist.getBox(nlist, depthReq);
+		        
+				if (errorCnt == 0)
+				{
+					BoxAssignment boxA = new BoxAssignment();
+					String pass = sugBox.BoxNumtoString();
+					sugBox = boxA.open(pass, nlist, sugBox, g, tempVeg, BoxTexts);
+					Box1Veg.setText(BoxTexts[0]);
+					Box2Veg.setText(BoxTexts[1]);
+					Box3Veg.setText(BoxTexts[2]);
+					Box4Veg.setText(BoxTexts[3]);
+					Box5Veg.setText(BoxTexts[4]);
+					Box6Veg.setText(BoxTexts[5]);
+					Box7Veg.setText(BoxTexts[6]);
+					Box8Veg.setText(BoxTexts[7]);
+					Box9Veg.setText(BoxTexts[8]);
+					Box10Veg.setText(BoxTexts[9]);
+					Box11Veg.setText(BoxTexts[10]);
+					Box12Veg.setText(BoxTexts[11]);
+					bvMap.putIfAbsent(sugBox, tempVeg);
+					nlist.deleteAtPosition(nlist, sugBox);
 				
-				BoxAssignment boxA = new BoxAssignment();
-				String pass = sugBox.BoxNumtoString();
-				sugBox = boxA.open(pass, nlist, sugBox, g, tempVeg, BoxTexts);
-				Box1Veg.setText(BoxTexts[0]);
-				Box2Veg.setText(BoxTexts[1]);
-				Box3Veg.setText(BoxTexts[2]);
-				Box4Veg.setText(BoxTexts[3]);
-				Box5Veg.setText(BoxTexts[4]);
-				Box6Veg.setText(BoxTexts[5]);
-				Box7Veg.setText(BoxTexts[6]);
-				Box8Veg.setText(BoxTexts[7]);
-				Box9Veg.setText(BoxTexts[8]);
-				Box10Veg.setText(BoxTexts[9]);
-				Box11Veg.setText(BoxTexts[10]);
-				Box12Veg.setText(BoxTexts[11]);
-				bvMap.putIfAbsent(sugBox, tempVeg);
-				nlist.deleteAtPosition(nlist, sugBox);
-				
-				textVeg.setText("");
-				textSorP.setText("");
-				textSBetween.setText("");
-				textSBetweenR.setText("");
-				textDepth.setText("");
-				textSun.setText("");
-				textWater.setText("");
-				textHarvest.setText("");
+					textVeg.setText("");
+					textSorP.setText("");
+					textSBetween.setText("");
+					textSBetweenR.setText("");
+					textDepth.setText("");
+					textSun.setText("");
+					textWater.setText("");
+					textHarvest.setText("");
+					
+					String nListString = nlist.printList();
+					if (nListString.length() == 0)
+					{
+						MessageDialog.openError(shlSetUpYour, "Info", "Your Garden is complete. Thank you.");
+						textVeg.setEnabled(false);
+						textSorP.setEnabled(false);
+						textSBetween.setEnabled(false);
+						textSBetweenR.setEnabled(false);
+						textDepth.setEnabled(false);
+						textSun.setEnabled(false);
+						textWater.setEnabled(false);
+						textHarvest.setEnabled(false);
+						btnSubmit.setEnabled(false);
+					}
+				}
 			}
 		});
 		
@@ -396,7 +417,8 @@ public class Gardening {
 		}
 		catch (NumberFormatException currentException)
 		{
-			MessageDialog.openError(shlSetUpYour, "Error", currentInput + "is not a number");
+			errorCnt++; 
+			MessageDialog.openError(shlSetUpYour, "Error", currentInput + " is not a number");
 		}
 		return isInteger;
 	}
@@ -412,10 +434,12 @@ public class Gardening {
 		}
 		catch (NumberFormatException currentException)
 		{
-			MessageDialog.openError(shlSetUpYour, "Error", currentInput + "is not a number");
+			errorCnt++; 
+			MessageDialog.openError(shlSetUpYour, "Error", currentInput + " is not a number");
 		}
 		return isDouble;
 	}
+	
 	
 	public void UpdateVegText(int boxNo, Vegetable v)
 	{

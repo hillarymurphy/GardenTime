@@ -108,7 +108,7 @@ public class BoxAssignment {
 				}
 				else
 				{
-					MessageDialog.openError(shlBoxSelection, "Error", newBox + "is not a number or not an availabe box");
+					MessageDialog.openError(shlBoxSelection, "Error", newBox + " is not a number or not an availabe box");
 				}
 			}
 		});
