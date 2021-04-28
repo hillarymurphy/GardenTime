@@ -99,17 +99,18 @@ public class BoxAssignment {
 				if(checkInteger(txtBoxSwitch.getText()))
 				{
 					newBox = Integer.parseInt(txtBoxSwitch.getText());
+					if (nlist.GetBox(newBox)!= null)
+					{
+						selBox = nlist.GetBox(newBox);
+						g.UpdateVegText(selBox.getBoxNum(), v);
+						shlBoxSelection.close();
+					}
+					else
+					{
+						MessageDialog.openError(shlBoxSelection, "Error", newBox + " is not an available box");
+					}
 				}
-				if (nlist.GetBox(newBox)!= null)
-				{
-					selBox = nlist.GetBox(newBox);
-					g.UpdateVegText(selBox.getBoxNum(), v);
-					shlBoxSelection.close();
-				}
-				else
-				{
-					MessageDialog.openError(shlBoxSelection, "Error", newBox + " is not a number or not an availabe box");
-				}
+				
 			}
 		});
 		btnSubmit.setBounds(261, 137, 75, 25);
@@ -127,7 +128,7 @@ public class BoxAssignment {
 		}
 		catch (NumberFormatException currentException)
 		{
-			MessageDialog.openError(shlBoxSelection, "Error", currentInput + "is not a number");
+			MessageDialog.openError(shlBoxSelection, "Error", currentInput + " is not a number");
 		}
 		return isInteger;
 	}

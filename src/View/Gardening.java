@@ -451,7 +451,7 @@ public class Gardening {
 				tLength = 5;
 			}
 			String temp = (String) BoxTexts[i].subSequence(0, tLength);
-			if(temp.contains("Box"+boxNo))
+			if(temp.equals("Box"+boxNo) || temp.equals("Box"+boxNo+" "))
 			{
 				BoxTexts[i] = v.getKind();
 			}
