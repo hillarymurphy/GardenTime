@@ -119,7 +119,7 @@ public class Gardening {
 		textSun.setBounds(496, 56, 76, 21);
 		
 		Label lblWaterRequired = new Label(shlSetUpYour, SWT.NONE);
-		lblWaterRequired.setText("Watering frequency required:");
+		lblWaterRequired.setText("Watering Required:");
 		lblWaterRequired.setBounds(294, 83, 185, 15);
 		
 		textWater = new Text(shlSetUpYour, SWT.BORDER);
