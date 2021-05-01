@@ -1,86 +1,97 @@
+/**
+ * Garden Box Linked List class to hold all garden boxes
+ * @author Hillary Murphy
+ * @version 1
+ */
+
 package Model;
 
 public class GardenBoxLinkedList
 {
     public Node head;  // head of list
   
-    /* Linked list Node*/
+    /**
+     * Class for Node to hold garden box, node
+     * @author Hillary Murphy
+     *
+     */
     public class Node
     {
-        public GardenBox box;
+        GardenBox box;
         public Node next;
-        public Node(GardenBox b) {box = b; next = null; }
+        /**
+         * Constructor for Node
+         * @param b - garden box and default next node to null
+         */
+        Node(GardenBox b) {box = b; next = null; }
     }
   
-    /* Inserts a new Node at front of the list. */
+    /**
+     * Method to insert a new node at the front of the list
+     * @param new_box
+     */
     public void push(GardenBox new_box)
     {
-        /* 1 & 2: Allocate the Node &
-                  Put in the data*/
         Node new_node = new Node(new_box);
-  
-        /* 3. Make next of new Node as head */
         new_node.next = head;
-  
-        /* 4. Move the head to point to new Node */
         head = new_node;
     }
   
-    /* Inserts a new node after the given prev_node. */
+    /**
+     * Method to insert new node after the provided previous node
+     * @param prev_node
+     * @param new_box
+     */
     public void insertAfter(Node prev_node, GardenBox new_box)
     {
-        /* 1. Check if the given Node is null */
+        // if node is empty - it will error
         if (prev_node == null)
         {
             System.out.println("The given previous node cannot be null");
             return;
         }
   
-        /* 2 & 3: Allocate the Node &
-                  Put in the data*/
         Node new_node = new Node(new_box);
-  
-        /* 4. Make next of new Node as next of prev_node */
         new_node.next = prev_node.next;
-  
-        /* 5. make next of prev_node as new_node */
         prev_node.next = new_node;
     }
      
-    /* Appends a new node at the end.  This method is 
-       defined inside GardenBoxGardenBoxLinkedList class shown above */
+    /**
+     * Method to add a new node at the end of list. 
+     * @param new_box
+     */
     public void append(GardenBox new_box)
     {
-        /* 1. Allocate the Node &
-           2. Put in the data
-           3. Set next as null */
         Node new_node = new Node(new_box);
   
-        /* 4. If the Linked List is empty, then make the
-              new node as head */
+        //if head is null, just add to list and retun
         if (head == null)
         {
             head = new Node(new_box);
             return;
         }
   
-        /* 4. This new node is going to be the last node, so
-              make next of it as null */
         new_node.next = null;
   
-        /* 5. Else traverse till the last node */
+        // traverse until end of list
         Node last = head; 
         while (last.next != null)
             last = last.next;
   
-        /* 6. Change the next of last node */
+        // the node that used to be the last node, now needs to point to the new node
         last.next = new_node;
         return;
     }
     
+    /**
+     * Method to get the box associated with the box number
+     * @param boxNo
+     * @return
+     */
     public GardenBox GetBox(int boxNo)
     {
         Node current = head;
+        //keep traversing until boxNum matches the box number sent into call
         while (current != null)
         {
             if (current.box.boxNum == boxNo)
@@ -88,12 +99,17 @@ public class GardenBoxLinkedList
             current = current.next;
         }
  
-        /* if we get to this line, the caller was asking
-        for a non-existent element so we assert fail */
+        // only get to this if the box is invalid
         assert (false);
         return null;
     }
     
+    /**
+     * Method to delete a box from the linked list if already used
+     * @param list - list to remove from
+     * @param box - box to remove
+     * @return updated list
+     */
     public GardenBoxLinkedList deleteAtPosition(GardenBoxLinkedList list, GardenBox box)
     {
     	// Store head node
@@ -130,8 +146,10 @@ public class GardenBoxLinkedList
     	return list;
     }
   
-    /* This function prints contents of linked list starting from
-        the given node */
+    /**
+     * Method that prints a string of current list
+     * @return String of list
+     */
     public String printList()
     {
     	String gBoxString = new String();
@@ -144,7 +162,10 @@ public class GardenBoxLinkedList
         return gBoxString;
     }
     
- // function to sort a singly linked list using insertion sort 
+    /**
+     * Method to sort the linked list by depth
+     * @param headref
+     */
     public void insertionSortDepth(Node headref) 
     { 
         // Initialize sorted linked list 
@@ -170,11 +191,12 @@ public class GardenBoxLinkedList
         return;
     } 
   
-      
-    // function to insert a new_node in a list. Note that 
-    // this function expects a pointer to head_ref as this 
-    // can modify the head of the input linked list 
-    // (similar to push()) 
+    /**
+     * Method to insert a node in sorted order - this is called to from the insertionSortDepth method
+     * @param newnode - node to add
+     * @param sorted - sorted node
+     * @return sorted node
+     */
     Node sortedInsert(Node newnode, Node sorted) 
     { 
         // Special case for the head end 
@@ -199,6 +221,12 @@ public class GardenBoxLinkedList
         return sorted;
     } 
     
+    /**
+     * Method to get a box that has depth required for vegetable
+     * @param list - passes in sorted list to iterate through
+     * @param depthReq - depth required for vegetable
+     * @return garden box that satisfies requirement
+     */
     public GardenBox getBox(GardenBoxLinkedList list, double depthReq)
     {
     	Node tnode = list.head;

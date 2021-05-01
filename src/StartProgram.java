@@ -1,14 +1,30 @@
+/**************************************************************
+* Name        : GardenTimeMurphy - Start Program
+* Author      : Hillary Murphy
+* Created     : 4/29/2021
+* Course      : CIS 152 Data Structures
+* Version     : 1.0
+* OS          : Windows XX
+* Copyright   : This is my own original work based on
+*               specifications issued by our instructor
+* Description : This is the starter of the program
+*               Input:  Predetermined garden boxes, create linked list, create empty hashmap, create gardening
+*               Output: open the window
+* Academic Honesty: I attest that this is my original work.
+* I have not used unauthorized source code, either modified or 
+* unmodified. I have not given other fellow student(s) access to
+* my program.         
+***************************************************************/
+
 import View.Gardening;
 import Model.*;
 
-public class StartProgram {
+public class StartProgram { 
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 	        
 		GardenBox gBox1 = new GardenBox(1, 20, 5, 10, "full");
 
-	    
 	    GardenBox gBox2 = new GardenBox(2, 6, 3, 5, "full");
 	    GardenBox gBox3 = new GardenBox(3, 6, 3, 6, "full");
 	    GardenBox gBox4 = new GardenBox(4, 6, 3, 6, "full");

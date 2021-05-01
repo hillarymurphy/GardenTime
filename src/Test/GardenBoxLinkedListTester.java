@@ -1,3 +1,21 @@
+/**************************************************************
+* Name        : GardenTimeMurphy - GardenBoxLinkedList Tester
+* Author      : Hillary Murphy
+* Created     : 4/29/2021
+* Course      : CIS 152 Data Structures
+* Version     : 1.0
+* OS          : Windows XX
+* Copyright   : This is my own original work based on
+*               specifications issued by our instructor
+* Description : This is a tester for the GardenBoxLinkedList
+*               Input:  Predetermined garden boxes, test sorting second list
+*               Output: Information on each box
+* Academic Honesty: I attest that this is my original work.
+* I have not used unauthorized source code, either modified or 
+* unmodified. I have not given other fellow student(s) access to
+* my program.         
+***************************************************************/
+
 package Test;
 
 import Model.*;

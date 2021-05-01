@@ -1,3 +1,9 @@
+/**
+ * Screen for assigning vegetable to a garden box. User can confirm recommendation or pick their own desired box.
+ * @author Hillary Murphy
+ * @version 1
+ */
+
 package View;
 
 import org.eclipse.swt.widgets.Display;
@@ -79,6 +85,9 @@ public class BoxAssignment {
 		
 		Button btnConfirm = new Button(shlBoxSelection, SWT.NONE);
 		btnConfirm.addMouseListener(new MouseAdapter() {
+			/**
+			 * Method for Confirm button being clicked
+			 */
 			@Override
 			public void mouseDown(MouseEvent e) {
 				g.UpdateVegText(selBox.getBoxNum(), v);
@@ -93,13 +102,16 @@ public class BoxAssignment {
 		
 		Button btnSubmit = new Button(shlBoxSelection, SWT.NONE);
 		btnSubmit.addMouseListener(new MouseAdapter() {
+			/**
+			 * Method for Submit but being clicked
+			 */
 			@Override
 			public void mouseDown(MouseEvent e) {
 				int newBox = 0;
 				if(checkInteger(txtBoxSwitch.getText()))
 				{
 					newBox = Integer.parseInt(txtBoxSwitch.getText());
-					if (nlist.GetBox(newBox)!= null)
+					if (nlist.GetBox(newBox)!= null) // make sure box requested is available and exists
 					{
 						selBox = nlist.GetBox(newBox);
 						g.UpdateVegText(selBox.getBoxNum(), v);
@@ -117,6 +129,11 @@ public class BoxAssignment {
 		btnSubmit.setText("Submit");
 		return selBox;
 	}
+	/**
+	 * Method to make sure box entered really was integer
+	 * @param currentInput
+	 * @return true/false
+	 */
 	public boolean checkInteger(String currentInput)
 	{
 		boolean isInteger = false;

@@ -1,3 +1,9 @@
+/**
+ * Screen for seeing all the available garden boxes. User enters all the information about the vegetable to be added
+ * @author Hillary Murphy
+ * @version 1
+ */
+
 package View;
 import Model.*;
 
@@ -29,6 +35,7 @@ public class Gardening {
 	private Text textHarvest;
 	private final FormToolkit formToolkit = new FormToolkit(Display.getDefault());
 	
+	// holds all text information on vegetable assignment
 	String[] BoxTexts = {"Box1 Empty", "Box2 Empty", "Box3 Empty", "Box4 Empty", "Box5 Empty", "Box6 Empty", 
 			"Box7 Empty", "Box8 Empty", "Box9 Empty", "Box10 Empty", "Box11 Empty", "Box12 Empty"};
 
@@ -69,7 +76,7 @@ public class Gardening {
 		
 		shlSetUpYour = new Shell();
 		shlSetUpYour.setMinimumSize(new Point(133, 39));
-		shlSetUpYour.setSize(612, 513);
+		shlSetUpYour.setSize(612, 550);
 		shlSetUpYour.setText("Set Up Your Garden!");
 		
 		Label lblAddAVegetable = new Label(shlSetUpYour, SWT.NONE);
@@ -145,7 +152,7 @@ public class Gardening {
 		Box1Specs.setBounds(62, 366, 54, 70);
 		formToolkit.adapt(Box1Specs, true, true);
 		
-		Label Box1 = formToolkit.createLabel(shlSetUpYour, "Box 2", SWT.BORDER);
+		Label Box1 = formToolkit.createLabel(shlSetUpYour, "Box 1", SWT.BORDER);
 		Box1.setBackground(SWTResourceManager.getColor(204, 255, 204));
 		Box1.setBounds(0, 205, 122, 237);
 		
@@ -316,11 +323,22 @@ public class Gardening {
 		
 		Button btnSubmit = new Button(shlSetUpYour, SWT.NONE);
 		btnSubmit.addMouseListener(new MouseAdapter() {
+			/**
+			 * Method for if submit button is clicked
+			 */
 			@Override
 			public void mouseDown(MouseEvent e) {
 				errorCnt = 0; 
-				String kind = textVeg.getText();
-				String seedOrPlant = textSorP.getText();
+				String kind = "";
+				if(checkTextNotEmpty(textVeg.getText()))
+				{
+					kind = textVeg.getText();
+				}
+				String seedOrPlant = "";
+				if(checkTextNotEmpty(textSorP.getText()))
+				{
+					seedOrPlant = textSorP.getText();
+				}
 				Double spacePer = 0.0;
 				if(checkDouble(textSBetween.getText()))
 				{
@@ -336,25 +354,35 @@ public class Gardening {
 				{
 					depthReq = Double.parseDouble(textDepth.getText());
 				}
-				String sunReq = textSun.getText();
-				String waterReq = textWater.getText();
+				String sunReq = "";
+				if(checkTextNotEmpty(textSun.getText()))
+				{
+					sunReq = textSun.getText();
+				}
+				String waterReq = "";
+				if(checkTextNotEmpty(textWater.getText()))
+				{
+					waterReq = textWater.getText();
+				}
 				int harvestDuration = 0;
 				if(checkInteger(textHarvest.getText()))
 				{
 					harvestDuration = Integer.parseInt(textHarvest.getText());
 				}
-				
-				Vegetable tempVeg = new Vegetable(kind, seedOrPlant, spacePer, spaceRow, depthReq, sunReq, waterReq, harvestDuration);
-				
-				GardenBoxLinkedList nlist = new GardenBoxLinkedList();
-				nlist = llist;
-
-		        nlist.insertionSortDepth(nlist.head); 
-		        
-		        GardenBox sugBox = nlist.getBox(nlist, depthReq);
-		        
-				if (errorCnt == 0)
+				if (errorCnt == 0) // once no fields have an error, update
 				{
+				// after all fields loaded into variables, create vegetable
+					Vegetable tempVeg = new Vegetable(kind, seedOrPlant, spacePer, spaceRow, depthReq, sunReq, waterReq, harvestDuration);
+					
+					
+					GardenBoxLinkedList nlist = new GardenBoxLinkedList(); // linked list to sort later
+					nlist = llist; // equals existing linked list
+	
+			        nlist.insertionSortDepth(nlist.head); //sort the list
+			        
+			        GardenBox sugBox = nlist.getBox(nlist, depthReq); // suggest appropriate box based on depth
+		        
+				
 					BoxAssignment boxA = new BoxAssignment();
 					String pass = sugBox.BoxNumtoString();
 					sugBox = boxA.open(pass, nlist, sugBox, g, tempVeg, BoxTexts);
@@ -383,7 +411,7 @@ public class Gardening {
 					textHarvest.setText("");
 					
 					String nListString = nlist.printList();
-					if (nListString.length() == 0)
+					if (nListString.length() == 0) // once all garden boxes have a vegetable, program is done. Disable entry boxes.
 					{
 						MessageDialog.openError(shlSetUpYour, "Info", "Your Garden is complete. Thank you.");
 						textVeg.setEnabled(false);
@@ -403,9 +431,19 @@ public class Gardening {
 		btnSubmit.setBounds(246, 138, 75, 25);
 		formToolkit.adapt(btnSubmit, true, true);
 		btnSubmit.setText("Submit");
+		
+		Label lblNewLabel = new Label(shlSetUpYour, SWT.NONE);
+		lblNewLabel.setBounds(0, 486, 307, 15);
+		formToolkit.adapt(lblNewLabel, true, true);
+		lblNewLabel.setText("Legend: W=Width, L=Length, A=Area, D=Depth, S=Sun");
 
 	}
 	
+	/**
+	 * Method to make sure input is really an integer
+	 * @param currentInput
+	 * @return true/false
+	 */
 	public boolean checkInteger(String currentInput)
 	{
 		boolean isInteger = false;
@@ -418,11 +456,23 @@ public class Gardening {
 		catch (NumberFormatException currentException)
 		{
 			errorCnt++; 
-			MessageDialog.openError(shlSetUpYour, "Error", currentInput + " is not a number");
+			if (currentInput == "")
+			{
+				MessageDialog.openError(shlSetUpYour, "Error", "Blank fields are not allowed");
+			}
+			else
+			{
+				MessageDialog.openError(shlSetUpYour, "Error", currentInput + " is not a number");
+			}
 		}
 		return isInteger;
 	}
 	
+	/**
+	 * Method to make sure input in field really is a double
+	 * @param currentInput
+	 * @return true/false
+	 */
 	public boolean checkDouble(String currentInput)
 	{
 		boolean isDouble = false;
@@ -435,17 +485,49 @@ public class Gardening {
 		catch (NumberFormatException currentException)
 		{
 			errorCnt++; 
-			MessageDialog.openError(shlSetUpYour, "Error", currentInput + " is not a number");
+			if (currentInput == "")
+			{
+				MessageDialog.openError(shlSetUpYour, "Error", "Blank fields are not allowed");
+			}
+			else
+			{
+				MessageDialog.openError(shlSetUpYour, "Error", currentInput + " is not a number");
+			}
 		}
 		return isDouble;
 	}
 	
+	/**
+	 * Method to make sure String fields filled
+	 * @param currentInput
+	 * @return true/false
+	 */
+	public boolean checkTextNotEmpty(String currentInput)
+	{
+		boolean isFilled = false;
+		
+		if (currentInput == "")
+		{
+			errorCnt++;
+			MessageDialog.openError(shlSetUpYour, "Error", "Blank fields are not allowed");
+		}
+		else
+		{
+			isFilled = true;
+		}
+		return isFilled;
+	}
 	
+	/**
+	 * Method to update the text for above the garden box to indicate vegetable assignment
+	 * @param boxNo - Garden Box getting Vegetable
+	 * @param v - Vegetable assigned
+	 */
 	public void UpdateVegText(int boxNo, Vegetable v)
 	{
 		for(int i=0; i < BoxTexts.length;i++)
 		{	
-			int tLength = BoxTexts[i].length();
+			int tLength = BoxTexts[i].length(); // code to handle if something like peas is entered (less than the 5 characters)
 			if (tLength >= 5)
 			{
 				tLength = 5;
